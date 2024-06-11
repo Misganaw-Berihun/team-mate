@@ -1,0 +1,6 @@
+{
+    "csv_file_path": "data/all_nov_jobs.csv",
+    "chunk_size": 500,
+    "batch_size": 50
+}
+  

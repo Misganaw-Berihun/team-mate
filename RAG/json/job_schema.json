@@ -1,0 +1,69 @@
+{
+    "Job": {
+      "class": "Job",
+      "description": "Job postings for searching and filtering",
+      "properties": [
+        {
+          "name": "job_id",
+          "dataType": ["uuid"],
+          "description": "Reference to the job posting"
+        },
+        {
+          "name": "title",
+          "dataType": ["text"],
+          "description": "Title of the job posting"
+        },
+        {
+          "name": "company",
+          "dataType": ["text"],
+          "description": "Name of the company"
+        }
+      ],
+      "vectorizer": "text2vec-openai",
+      "moduleConfig": {
+        "text2vec-openai": {
+          "vectorizeClassName": false,
+          "model": "ada",
+          "modelVersion": "002",
+          "type": "text"
+        },
+        "generative-openai": {
+          "model": "gpt-3.5-turbo"
+        }
+      }
+    },
+    "JobDescriptionChunk": {
+      "class": "JobDescriptionChunk",
+      "description": "Chunks of job descriptions linked to job postings",
+      "properties": [
+        {
+          "name": "job_id",
+          "dataType": ["uuid"],
+          "description": "Reference to the job posting"
+        },
+        {
+          "name": "content",
+          "dataType": ["text"],
+          "description": "Chunk of the job description"
+        },
+        {
+          "name": "order",
+          "dataType": ["int"],
+          "description": "Order of the chunk in the full description"
+        }
+      ],
+      "vectorizer": "text2vec-openai",
+      "moduleConfig": {
+        "text2vec-openai": {
+          "vectorizeClassName": false,
+          "model": "ada",
+          "modelVersion": "002",
+          "type": "text"
+        },
+        "generative-openai": {
+          "model": "gpt-3.5-turbo"
+        }
+      }
+    }
+  }
+  
