@@ -2,7 +2,8 @@ import uvicorn
 import socketio
 from fastapi import FastAPI
 from typing import Dict, List
-from weaviate import setup_weaviate_interface
+from weaviate_helper import setup_weaviate_interface
+from RAG.main_query import process_user_query
 
 # Fast API application
 app = FastAPI()
@@ -64,10 +65,15 @@ async def handle_chat_message(sid, data):
             "isUserMessage": True,
             "timestamp": data.get("timestamp"),
         }
+
+        user_question = data.get("message")
+        response_message_text = await process_user_query(
+                user_question)
         sessions[session_id].append(received_message)
+
         response_message = {
             "id": data.get("id") + "_response",
-            "textResponse": data.get("message"),
+            "textResponse": response_message_text,
             "isUserMessage": False,
             "timestamp": data.get("timestamp"),
             "isComplete": True,
